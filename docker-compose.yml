@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  trpl-book:
+    build: .
+    container_name: rust-cn-docs
+    ports:
+      - "24443:80"  # 你可以通过 http://localhost:8080 访问
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

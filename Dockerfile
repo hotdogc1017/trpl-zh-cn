@@ -1,5 +1,5 @@
 # --- 第一阶段：构建 ---
-FROM rust:1.75-slim AS builder
+FROM rust:alpine AS builder
 
 # 安装 mdbook
 RUN cargo install mdbook

@@ -1,14 +1,16 @@
-version: '3.8'
-
 services:
   trpl-book:
-    build: .
+    image: hotdog1017/trpl-zh-cn:latest  # 改为使用构建好的镜像
     container_name: rust-cn-docs
     ports:
-      - "24443:80"  # 你可以通过 http://localhost:8080 访问
+      - "24443:80"
     restart: always
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+
+  # Watchtower 自动更新服务
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 300 --cleanup # 每 300 秒检查一次更新，并清理旧镜像
+    restart: always
